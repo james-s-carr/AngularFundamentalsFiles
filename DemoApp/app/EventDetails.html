@@ -11,7 +11,7 @@
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
-
+                <li><a href="NewEvent.html">Create Event</a></li>
             </ul>
         </div>
     </div>
@@ -22,11 +22,11 @@
             </div>
         </div>
 
-        <div ng-bind-html="snippet">some title</div>
         <div class="row">
             <div class="span3">
                 <div><strong>Date:</strong> {{event.date}}</div>
                 <div><strong>Time:</strong> {{event.time}}</div>
+                <div><strong>Price:</strong> {{42 | currency:'£'}}</div>
             </div>
             <div class="span4">
                 <address>
@@ -41,7 +41,7 @@
 
         <h3>Sessions</h3>
         <ul class="thumbnails">
-            <li ng-repeat="session in event.sessions">
+            <li ng-repeat="session in event.sessions | orderBy:sortOrder">
                 <div class="row session">
                     <div class="span0 well votingWidget">
                         <div class="votingButton" ng-click="upVoteSession(session)">
@@ -55,7 +55,8 @@
                         </div>
                     </div>
                     <div class="well span9">
-                        <h4 class="well-title">{{session.name2}}</h4>
+                        <h4 class="well-title">{{session.name}}</h4>
+                        <span>Duration: {{session.duration | durations}}</span>
                     </div>
                 </div>
             </li>
@@ -70,5 +71,6 @@
 <script src="/lib/angular/angular-sanitize.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/controllers/EventCtrl.js"></script>
+<script src="/js/filters.js"></script>
 </body>
 </html>
